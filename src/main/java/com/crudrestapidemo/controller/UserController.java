@@ -1,5 +1,6 @@
 package com.crudrestapidemo.controller;
 
+import com.crudrestapidemo.dto.UserDto;
 import com.crudrestapidemo.entity.User;
 import com.crudrestapidemo.service.UserService;
 import lombok.AllArgsConstructor;
@@ -17,35 +18,39 @@ public class UserController {
 
     // Build CreateUser Rest API
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedUser = userService.createUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+        UserDto savedUserDto = userService.createUser(user);
+        return new ResponseEntity<>(savedUserDto, HttpStatus.CREATED);
     }
+
 
     // Get User By id
     // http://localhost:8080/api/users/1
     @GetMapping("{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long userId){
-        User user = userService.getUserById(userId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long userId){
+        UserDto userdto = userService.getUserById(userId);
+        return new ResponseEntity<>(userdto, HttpStatus.OK);
     }
+
 
     // Get All users
     // http://localhost:8080/api/users
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<UserDto>> getAllUsers(){
         return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
     }
+
 
     // Update User
     @PutMapping("{id}")
     // http://localhost:8080/api/users/1
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
-                                           @RequestBody User user){
-        user.setId(id);
-        User updatedUser = userService.updateUser(user);
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id,
+                                           @RequestBody UserDto userDto){
+        userDto.setId(id);
+        UserDto updatedUser = userService.updateUser(userDto);
         return new ResponseEntity<>(updatedUser,HttpStatus.OK);
     }
+
 
     // Delete User
     @DeleteMapping("{id}")
