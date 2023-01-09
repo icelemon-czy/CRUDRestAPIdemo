@@ -2,12 +2,16 @@ package com.crudrestapidemo.controller;
 
 import com.crudrestapidemo.dto.UserDto;
 import com.crudrestapidemo.entity.User;
+import com.crudrestapidemo.exception.ErrorDetails;
+import com.crudrestapidemo.exception.ResourceNotFoundException;
 import com.crudrestapidemo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -58,5 +62,18 @@ public class UserController {
         userService.deleteUser(userId);
         return new ResponseEntity<>("Successfully delete",HttpStatus.OK);
     }
+
+    // Exception Handler to this specific User Controller
+//    @ExceptionHandler(ResourceNotFoundException.class)
+//    public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
+//                                                                        WebRequest webRequest){
+//        ErrorDetails errorDetails = new ErrorDetails(
+//                LocalDateTime.now(),
+//                exception.getMessage(),
+//                webRequest.getDescription(false),
+//                "User Not Found"
+//        );
+//        return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
+//    }
 
 }

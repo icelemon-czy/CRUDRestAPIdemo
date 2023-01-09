@@ -14,6 +14,7 @@ public class UserMapper {
         );
         return userDto;
     }
+
     // Convert User Dto to JPA Entity
     public static User mapToUser(UserDto userDto){
         User user = new User(
